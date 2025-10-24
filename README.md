@@ -58,6 +58,35 @@ python src/bot.py account
 
 If you see your account balance, you're golden! If not, double-check your API keys.
 
+## 🚀 **How to Run the Bot**
+
+### Quick Start Commands
+
+**1. Check if everything is working:**
+```bash
+python src/bot.py --help
+```
+
+**2. View account information:**
+```bash
+python src/bot.py account
+```
+
+**3. Your first trade (market order):**
+```bash
+python src/bot.py market --symbol BTCUSDT --side BUY --quantity 0.001
+```
+
+**4. Place a limit order:**
+```bash
+python src/bot.py limit --symbol BTCUSDT --side BUY --quantity 0.001 --price 44000
+```
+
+**5. Check your open orders:**
+```bash
+python src/bot.py orders
+```
+
 ## 🎯 Usage
 
 ### Basic Commands
@@ -82,37 +111,92 @@ python src/bot.py limit --symbol BTCUSDT --side BUY --quantity 0.01 --price 4500
 python src/bot.py stop-limit --symbol BTCUSDT --side SELL --quantity 0.01 --stop-price 44000 --limit-price 43900
 ```
 
-### Advanced Orders
+### Advanced Orders (The Real Power!)
+
+**Stop-Limit Order (Risk management):**
+```bash
+python src/bot.py stop-limit --symbol BTCUSDT --side SELL --quantity 0.001 --stop-price 44000 --limit-price 43900
+```
 
 **OCO Order (Take Profit + Stop Loss):**
 ```bash
-python src/bot.py oco --symbol BTCUSDT --side SELL --quantity 0.01 --tp-price 50000 --sl-price 40000
+python src/bot.py oco --symbol BTCUSDT --side SELL --quantity 0.001 --tp-price 50000 --sl-price 40000
 ```
 
 **TWAP Order (Split large order over time):**
 ```bash
-python src/bot.py twap --symbol BTCUSDT --side BUY --quantity 0.1 --duration 600 --intervals 20
+python src/bot.py twap --symbol BTCUSDT --side BUY --quantity 0.01 --duration 300 --intervals 10
 ```
 
 **Grid Trading (My favorite - works great in sideways markets):**
 ```bash
-python src/bot.py grid --symbol BTCUSDT --base-price 45000 --levels 10 --spread 0.02 --quantity 0.01
+python src/bot.py grid --symbol BTCUSDT --base-price 45000 --levels 5 --spread 0.02 --quantity 0.001
 ```
 
 *Pro tip: I usually run this during Asian trading hours when BTC tends to range.*
 
-### Order Management
+### Step-by-Step First Run
 
-**List open orders:**
+**Step 1: Clone and Setup**
+```bash
+git clone https://github.com/sammed979/Sammed-Mahabal-Padanad-binance-bot.git
+cd Sammed-Mahabal-Padanad-binance-bot
+pip install -r requirements.txt
+```
+
+**Step 2: Configure API**
+```bash
+# Copy the example file
+copy .env.example .env
+# Edit .env with your API keys
+```
+
+**Step 3: Test Connection**
+```bash
+python src/bot.py account
+```
+
+**Step 4: Place Your First Order**
+```bash
+# Start small with a market order
+python src/bot.py market --symbol BTCUSDT --side BUY --quantity 0.001
+```
+
+**Step 5: Monitor Your Orders**
 ```bash
 python src/bot.py orders
+```
+
+### Order Management
+
+**List all open orders:**
+```bash
+python src/bot.py orders
+```
+
+**List orders for specific symbol:**
+```bash
 python src/bot.py orders --symbol BTCUSDT
 ```
 
-**Cancel order:**
+**Cancel a specific order:**
 ```bash
 python src/bot.py cancel --symbol BTCUSDT --order-id 12345678
 ```
+
+### Command Reference
+
+| Command | Description | Example |
+|---------|-------------|----------|
+| `account` | Show account info | `python src/bot.py account` |
+| `market` | Market order | `python src/bot.py market --symbol BTCUSDT --side BUY --quantity 0.001` |
+| `limit` | Limit order | `python src/bot.py limit --symbol BTCUSDT --side BUY --quantity 0.001 --price 44000` |
+| `stop-limit` | Stop-limit order | `python src/bot.py stop-limit --symbol BTCUSDT --side SELL --quantity 0.001 --stop-price 44000 --limit-price 43900` |
+| `oco` | OCO order | `python src/bot.py oco --symbol BTCUSDT --side SELL --quantity 0.001 --tp-price 50000 --sl-price 40000` |
+| `twap` | TWAP order | `python src/bot.py twap --symbol BTCUSDT --side BUY --quantity 0.01 --duration 300 --intervals 10` |
+| `grid` | Grid trading | `python src/bot.py grid --symbol BTCUSDT --base-price 45000 --levels 5 --spread 0.02 --quantity 0.001` |
+| `orders` | List orders | `python src/bot.py orders` |
+| `cancel` | Cancel order | `python src/bot.py cancel --symbol BTCUSDT --order-id 12345678` |
 
 ## 📊 Logging (Saved my bacon multiple times!)
 
